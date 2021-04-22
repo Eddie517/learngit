@@ -1,12 +1,12 @@
 #第1章 MapReduce概述
 ##1.1 MapReduce定义
-```shell
+```
   MapReduce是一个分布式运算程序的编程框架，是用户开发"基于Hadoop的数据分析应用"的核心框架。
   MapReduce核心功能是将用户编写的业务逻辑代码和自带默认组件整合成一个完整的分布式运算程序，并发运行在一个hadoop集群上。
 ```
 ##1.2 MapReduce优缺点
 ###1.2.1 优点
-```shell
+```
 1、MapReduce易于编程
 它简单的实现一些接口，就可以完成一个分布式程序，这个分布式程序可以分布到大量廉价的PC机器上运行。也就是说你写一个分布式程序，跟写一个简单的串行程序是一模一样的。就是因为这个特点使得MapReduce编程变得非常流行。
 
@@ -20,7 +20,7 @@ MapReduce设计的初衷就是使程序能够部署在廉价的PC机器上，这
 可以实现上千台服务器集群并发工作，提供数据处理能力。
 ```
 ###1.2.2 缺点
-```shell
+```
 1、不擅长实时计算
 MapReduce无法像MySQL一样，在毫秒或者秒级内返回结果。
 
@@ -33,8 +33,8 @@ MapReduce无法像MySQL一样，在毫秒或者秒级内返回结果。
 ##1.3 MapReduce核心思想
 MapReduce核心编程思想，如图所示。
 
-![ MapReduce 核心编程思想 ](./MapReduce.png)
-```shell
+![ MapReduce 核心编程思想 ](./png/MapReduce.png)
+```
 (1）分布式的运算程序往往需要分成至少2个阶段。
 (2）第一个阶段的MapTask并发实例，完全并行运行，互不相干。
 (3）第二个阶段的ReduceTask并发实例互不相干，但是他们的数据依赖于上一个阶段的所有MapTask并发实例的输出。
@@ -42,7 +42,7 @@ MapReduce核心编程思想，如图所示。
 总结：分析WordCount数据流走向深入理解MapReduce核心思想。
 ```
 ##1.4 MapReduce进程
-```shell
+```
 一个完整的MapReduce程序在分布式运行时有三类实例进程：
 (1)MrAppMaster:负责整个程序的过程调度及状态协调。
 (2)MapTask:负责Map阶段的整个数据处理流程。
@@ -66,7 +66,7 @@ MapReduce核心编程思想，如图所示。
 |array|	ArrayWritable|
 ##1.7 MapReduce编程规范
 用户编写的程序分成三个部分：Mapper、Reducer和Driver。
-```shell
+```
 1、Mapper阶段
 （1）用户自定义的Mapper要继承自己的父类
 （2）Mapper的输入数据是KV对的形式（KV的类型可自定义）
@@ -83,7 +83,7 @@ MapReduce核心编程思想，如图所示。
 ```
 ##1.8 WordCount案例实操
 ###1．需求
-```shell
+```
 
 在给定的文本文件中统计输出每一个单词出现的总次数
 （1）输入数据
@@ -98,7 +98,7 @@ xue
 hadoop
 ```
 ###2．需求分析
-```shell
+```
 
 按照MapReduce编程规范，分别编写Mapper，Reducer，Driver;
 
@@ -145,13 +145,13 @@ h、提交作业
 
 ```
 ###3.环境准备
-```shell
+```
 （1）创建maven工程
 ```
-![ 创建 maven ](./create%20maven0.png)
-![ 创建 maven ](./creat%20maven1.png)
+![ 创建 maven ](./png/create%20maven0.png)
+![ 创建 maven ](./png/creat%20maven1.png)
 
-```shell
+```
 (2)在项目的src/main/resources目录下，新建一个文件，命名为“log4j.properties”
 
 ```
@@ -167,7 +167,7 @@ log4j.appender.logfile.File=target/spring.log
 log4j.appender.logfile.layout=org.apache.log4j.PatternLayout
 log4j.appender.logfile.layout.ConversionPattern=%d %p [%c] - %m%n
 ```
-![ 文件 log4j ](./log4j.properties.png)
+![ 文件 log4j ](./png/log4j.properties.png)
 
 ###4.编写程序
 ####（1）编写Mapper类
@@ -287,16 +287,16 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 ```
 ###查看结果
-![result](./result.png)
+![result](./png/result.png)
 
 ##1.9 编写应用程序
 
-```shell
+```
 MapReduce将处理分为两个阶段：map阶段和reduce阶段。
 每个相位都有键值对作为输入和输出，其类型可以由程序员选择。
 程序员还指定了两个函数：map函数和reduce函数。
 ```
-![ application ](./application.png)
+![ application ](./png/application.png)
 ###Writing an Application – Mapper
 ```shell
 package com.hadoop.hdfs.api;
@@ -416,18 +416,18 @@ public class MaxTemperature {
 ####包装
 #####将程序打包为JAR文件以发送到集群
 #####使用Ant方便
-![ant](./ant.png)
+![ant](./png/ant.png)
 ####启动job
 #####使用-conf选项运行驱动程序以指定集群
-![successfully](./successfully.png)
+![successfully](./png/successfully.png)
 ####输出包括更多有用的信息
-![information](./information.png)
+![information](./png/information.png)
 ###The MapReduce Web UI
 ####用于查找作业的进度、统计信息和日志
 ####http://resource-manager-host:8088/
-![web](./webUI.png)
+![web](./png/webUI.png)
 ###检索结果
 ####每个reducer产生一个输出文件
 #####e.g., part-00000 … part-00029
 ###检索结果
-![output](./output.png)
+![output](./png/output.png)
